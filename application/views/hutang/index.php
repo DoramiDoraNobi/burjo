@@ -64,10 +64,10 @@
                     <h5>Menu</h5>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="<?php echo site_url('pelanggan') ?>">Data Pengutang</a>
+                            <a class="nav-link" href="<?php echo site_url('pelanggan') ?>">Data Pengutang</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="<?php echo site_url('hutang') ?>">Catatan Hutang</a>
+                            <a class="nav-link active" href="<?php echo site_url('hutang') ?>">Catatan Hutang</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Pelunasan Hutang</a>
@@ -81,64 +81,68 @@
             <div class="col-md-10">
                 <!-- Dashboard content here -->
                 <div class="mt-3 mr-3">
-                    <h2>Pelanggan</h2>
-                    <button class="btn btn-green" data-toggle="modal" data-target="#addPelangganModal">Tambah Catatan Pelanggan</button>
+                    <h2>Hutang</h2>
+                    <button class="btn btn-green" data-toggle="modal" data-target="#addHutangModal">Tambah Catatan Hutang</button>
 
                     <!-- Table for displaying data -->
                     <div class="mt-4">
                         <table class="table table-green">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
-                                    <th>Nama Pelanggan</th>
-                                    <th>Nomor Telepon</th>
-                                    <th>Alamat</th>
-                                    <th>Catatan Tambahan</th>
-                                    <th>Aksi</th>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Nama Pelanggan</th>
+                                    <th scope="col">Jumlah Hutang</th>
+                                    <th scope="col">Tanggal</th>
+                                    <th scope="col">Status Pembayaran</th>
+                                    <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($daftar_pelanggan as $index => $data) { ?>
+                                <?php foreach ($daftar_hutang as $index => $data) { ?>
                                     <tr>
                                         <td><?php echo $index + 1; ?></td>
-                                        <td><?php echo $data->nama_pelanggan; ?></td>
-                                        <td><?php echo $data->nomor_telepon; ?></td>
-                                        <td><?php echo $data->alamat; ?></td>
-                                        <td><?php echo $data->catatan_tambahan; ?></td>
+                                        <td><?php echo $this->Hutang_model->GetPelanngganbyID($data->id_pelanggan); ?></td>
+                                        <td><?php echo $data->jumlah_hutang; ?></td>
+                                        <td><?php echo $data->tanggal; ?></td>
+                                        <td><?php echo $data->status_pembayaran; ?></td>
                                         <td>
-                                            <button class="btn btn-primary btn-edit" data-toggle="modal" data-target="#editPelangganModal<?php echo $data->id_pelanggan; ?>">Edit</button>
-                                            <button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#deletePelangganModal<?php echo $data->id_pelanggan; ?>">Delete</button>
+                                            <button class="btn btn-primary btn-edit" data-toggle="modal" data-target="#editHutangModal<?php echo $data->id_hutang; ?>">Edit</button>
+                                            <button class="btn btn-danger btn-delete" data-toggle="modal" data-target="#deleteHutangModal<?php echo $data->id_hutang; ?>">Delete</button>
                                         </td>
                                     </tr>
                                     <!-- Modal Edit Pelanggan -->
-                                    <div class="modal fade" id="editPelangganModal<?php echo $data->id_pelanggan; ?>" tabindex="-1" role="dialog" aria-labelledby="editPelangganModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="editHutangModal<?php echo $data->id_hutang; ?>" tabindex="-1" role="dialog" aria-labelledby="editHutangModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="editPelangganModalLabel">Edit Pelanggan</h5>
+                                                    <h5 class="modal-title" id="editHutangModalLabel">Edit Hutang</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form method="post" action="<?php echo site_url('pelanggan/do_update/'.$data->id_pelanggan); ?>">
+                                                    <form method="post" action="<?php echo site_url('hutang/do_update/'.$data->id_hutang); ?>">
                                                     <input type="hidden" name="id_pemilik" value="<?php echo $data->id_pemilik; ?>">
-                                                    <input type="hidden" name="id_pelanggan" value="<?php echo $data->id_pelanggan; ?>">
+                                                    <input type="hidden" name="id_hutang" value="<?php echo $data->id_hutang; ?>">
                                                     <div class="form-group">
                                                         <label for="nama_pelanggan">Nama Pelanggan</label>
-                                                        <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan" value="<?php echo $data->nama_pelanggan; ?>">
+                                                        <select class="form-control" id="nama_pelanggan" name="nama_pelanggan">
+                                                            <?php foreach ($list_pelanggan as $pelanggan) { ?>
+                                                                <option value="<?php echo $pelanggan->id_pelanggan ?>" <?php echo ($pelanggan->nama_pelanggan == $data->id_pelanggan) ? 'selected' : '' ?>>
+                                                                    <?php echo $pelanggan->nama_pelanggan ?>
+                                                                </option>
+                                                            <?php } ?>
+                                                        </select>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="harga">Nomor Telepon</label>
-                                                        <input type="text" class="form-control" id="nomor_telepon" name="nomor_telepon" value="<?php echo $data->nomor_telepon; ?>">
+                                                        <label for="jumlah_hutang">Jumlah Hutang</label>
+                                                        <input type="text" class="form-control" id="jumlah_hutang" name="jumlah_hutang" value="<?php echo $data->jumlah_hutang; ?>">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="harga">alamat</label>
-                                                        <input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $data->alamat; ?>">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="catatan_tambahan">Catatan Tambahan</label>
-                                                        <input type="text" class="form-control" id="catatan_tambahan" name="catatan_tambahan" value="<?php echo $data->catatan_tambahan; ?>">
+                                                        <label for="harga">Status Pembayaran</label>
+                                                        <select class="form-control" id="status_pembayaran" name="status_pembayaran">
+                                                            <option value="SUDAH">SELESAI</option>
+                                                            <option value="BELUM">BELUM</option>
                                                     </div>
                                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                                     </form>
@@ -148,11 +152,11 @@
                                     </div>
 
                                     <!-- Modal for Deleting Pelanggan -->
-                                    <div class="modal fade" id="deletePelangganModal<?php echo $data->id_pelanggan; ?>" tabindex="-1" role="dialog" aria-labelledby="deletePelangganModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="deleteHutangModal<?php echo $data->id_hutang; ?>" tabindex="-1" role="dialog" aria-labelledby="deleteHutangModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="deletePelangganModalLabel">Delete Pelanggan</h5>
+                                                    <h5 class="modal-title" id="deleteHutangModalLabel">Delete Hutang</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -161,8 +165,8 @@
                                                     <p>Are you sure you want to delete this customer?</p>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <form action="<?php echo site_url('pelanggan/do_delete'); ?>" method="POST">
-                                                    <input type="hidden" name="id_pelanggan" value="<?php echo $data->id_pelanggan; ?>">
+                                                    <form action="<?php echo site_url('hutang/do_delete'); ?>" method="POST">
+                                                    <input type="hidden" name="id_hutang" value="<?php echo $data->id_hutang; ?>">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                     <button type="submit" class="btn btn-green">Delete</button>
                                                     </form>
@@ -185,32 +189,30 @@
     <!-- Tambahkan kode modal setelah bagian Load Bootstrap JS -->
 
 <!-- Modal for Adding Pelanggan -->
-<div class="modal fade" id="addPelangganModal" tabindex="-1" role="dialog" aria-labelledby="addPelangganModalLabel" aria-hidden="true">
+<div class="modal fade" id="addHutangModal" tabindex="-1" role="dialog" aria-labelledby="addHutangModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addPelangganModalLabel">Tambah Pelanggan</h5>
+                <h5 class="modal-title" id="addHutangModalLabel">Tambah Hutang</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?php echo site_url('pelanggan/do_create'); ?>" method="POST">
+                <form action="<?php echo site_url('hutang/do_create'); ?>" method="POST">
+                <div class="form-group">
+                    <label for="nama_pelanggan">Pilih Pelanggan</label>
+                    <select class="form-control" id="nama_pelanggan" name="nama_pelanggan">
+                        <?php foreach ($list_pelanggan as $pelanggan) { ?>
+                            <option value="<?php echo $pelanggan->id_pelanggan ?>">
+                                <?php echo $pelanggan->nama_pelanggan ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                </div>
                     <div class="form-group">
-                        <label for="nama_pelanggan">Nama Pelanggan</label>
-                        <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan" placeholder="Masukkan Nama Pelanggan">
-                    </div>
-                    <div class="form-group">
-                        <label for="nomor_telepon">Nomor Telepon</label>
-                        <input type="text" class="form-control" id="nomor_telepon" name="nomor_telepon" placeholder="Masukkan Nomor Telepon">
-                    </div>
-                    <div class="form-group">
-                        <label for="alamat">Alamat</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat">
-                    </div>
-                    <div class="form-group">
-                        <label for="catatan_tambahan">Catatan Tambahan</label>
-                        <input type="text" class="form-control" id="catatan_tambahan" name="catatan_tambahan" placeholder="Masukkan Catatan">
+                        <label for="jumlah_hutang">Jumlah Hutang</label>
+                        <input type="text" class="form-control" id="jumlah_hutang" name="jumlah_hutang" placeholder="Masukkan Jumlah Hutang">
                     </div>
                     <!-- Add more fields as needed -->
                 
