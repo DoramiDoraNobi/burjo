@@ -49,6 +49,9 @@
                     <h5>Menu</h5>
                     <ul class="nav flex-column">
                         <li class="nav-item">
+                            <a class="nav-link" href="#">Data Pengutang</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link active" href="#">Catatan Hutang</a>
                         </li>
                         <li class="nav-item">

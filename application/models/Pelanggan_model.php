@@ -25,7 +25,7 @@ class Pelanggan_model extends CI_Model
     {
         $this->db->where('id_pemilik', $id_pemilik);
         $query = $this->db->get('Pelanggan');
-        return $query->result_array();
+        return $query->result();
     }
 
     public function GetPelangganbyID($id_pelanggan)
@@ -35,9 +35,9 @@ class Pelanggan_model extends CI_Model
         return $query->row_array();
     }
 
-    public function UpdatePelanggan($data, $id_pelanggan)
+    public function UpdatePelanggan($data)
     {
-        $this->db->where('id_pelanggan', $id_pelanggan);
+        $this->db->where('id_pelanggan', $data['id_pelanggan']);
         $this->db->update('Pelanggan', $data);
     }
 

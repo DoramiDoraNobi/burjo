@@ -12,16 +12,13 @@ class Pelanggan extends CI_Controller
 
     public function index()
     {
-        $id_pemilik = $this->session->userdata('id_pemilik');
-        $data['pelanggan'] = $this->Pelanggan_model->GetPelangganbyPemilikID($id_pemilik);
-
-        $this->load->view('templates/header');
+        $id_pemilik = $this->session->userdata('ses_id');
+        $data['daftar_pelanggan'] = $this->Pelanggan_model->GetPelangganbyPemilikID($id_pemilik);
         $this->load->view('pelanggan/index', $data);
-        $this->load->view('templates/footer');
 
     }
     public function do_create(){
-        $id_pemilik = $this->session->userdata('id_pemilik');
+        $id_pemilik = $this->session->userdata('ses_id');
 
         $jumlah_pelanggan = $this->Pelanggan_model->hitung_jumlah_pelanggan($id_pemilik);
         $langganan = $this->Pelanggan_model->cek_langganan($id_pemilik);
@@ -38,7 +35,7 @@ class Pelanggan extends CI_Controller
             $data = array(
                 'nama_pelanggan' => $this->input->post('nama_pelanggan'),
                 'alamat' => $this->input->post('alamat'),
-                'nomor_telepon	' => $this->input->post('nomor_telepon	'),
+                'nomor_telepon' => $this->input->post('nomor_telepon'),
                 'catatan_tambahan' => $this->input->post('catatan_tambahan'),
                 'id_pemilik' => $id_pemilik
 
@@ -47,21 +44,24 @@ class Pelanggan extends CI_Controller
             redirect('pelanggan');
         }
     }
-    public function do_update($id_pelanggan){
-        $id_pemilik = $this->session->userdata('id_pemilik');
-
+    public function do_update(){
+        $id_pemilik = $this->session->userdata('ses_id');
+    
         $data = array(
+            'id_pelanggan' => $this->input->post('id_pelanggan'),
             'id_pemilik' => $id_pemilik,
             'nama_pelanggan' => $this->input->post('nama_pelanggan'),
             'alamat' => $this->input->post('alamat'),
-            'nomor_telepon	' => $this->input->post('nomor_telepon	'),
+            'nomor_telepon' => $this->input->post('nomor_telepon'),
             'catatan_tambahan' => $this->input->post('catatan_tambahan'),
         );
-        $this->Pelanggan_model->UpdatePelanggan($id_pelanggan, $data);
+        $this->Pelanggan_model->UpdatePelanggan($data);
         redirect('pelanggan');
     }
     
-    public function do_delete($id_pelanggan){
+    
+    public function do_delete(){
+        $id_pelanggan = $this->input->post('id_pelanggan');
         $this->Pelanggan_model->DeletePelanggan($id_pelanggan);
         redirect('pelanggan');
     }
