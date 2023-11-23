@@ -49,10 +49,10 @@
                     <h5>Menu</h5>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Data Pengutang</a>
+                            <a class="nav-link" href="<?php echo site_url('pelanggan') ?>">Data Pengutang</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Catatan Hutang</a>
+                            <a class="nav-link active" href="<?php echo site_url('hutang') ?>">Catatan Hutang</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Pelunasan Hutang</a>
