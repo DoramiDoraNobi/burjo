@@ -22,6 +22,7 @@
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-md-7 col-lg-5">
+				<a href="<?= base_url('')?>" class="mb-0 mt-2" style="font-size: 20px; text-decoration: none;"><u>Back</u></a>
 					<div class="login-wrap p-4 p-md-5">
 		      	<div class="icon d-flex align-items-center justify-content-center">
 		      		<span class="fa fa-user-o"></span>

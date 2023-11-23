@@ -123,7 +123,7 @@
                     <a href="<?php echo site_url('auth/register') ?>" class="btn btn-success btn-lg">Daftar Sekarang</a>
                 </div>
                 <div class="col-md-6">
-                    <img src="https://via.placeholder.com/400x300" alt="Gambar" class="img-fluid">
+                    <img src="<?= base_url('assets/logo/hutang.png')?>" alt="Gambar" class="img-fluid">
                 </div>
             </div>
         </div>

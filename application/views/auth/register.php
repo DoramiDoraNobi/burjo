@@ -31,6 +31,7 @@
 <body>
     <div class="container">
         <div class="form-container">
+        <a href="<?= base_url('')?>" class="mb-0 mt-2" style="font-size: 20px; text-decoration: none;"><u>Back</u></a>
             <h2 class="text-center mb-4">Register</h2>
             <form action="<?php echo site_url('auth/do_register') ?>" method="POST">
                 <div class="form-group">
