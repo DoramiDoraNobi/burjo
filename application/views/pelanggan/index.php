@@ -73,9 +73,6 @@
                             <a class="nav-link " href="<?php echo site_url('hutang') ?>">Catatan Hutang</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pelunasan Hutang</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="<?php echo site_url('hutang/history_hutang') ?>">History Hutang</a>
                         </li>
                         <li class="nav-item">
