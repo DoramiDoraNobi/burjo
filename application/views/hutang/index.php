@@ -64,17 +64,21 @@
                     <h5>Menu</h5>
                     <ul class="nav flex-column">
                         <li class="nav-item">
+                            <a class="nav-link" href="<?php echo site_url('auth/dashboard') ?>">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="<?php echo site_url('pelanggan') ?>">Data Pengutang</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="<?php echo site_url('hutang') ?>">Catatan Hutang</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pelunasan Hutang</a>
+                            <a class="nav-link" href="<?php echo site_url('hutang/history_hutang') ?>">History Hutang</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
                         </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -124,6 +128,7 @@
                                                     <form method="post" action="<?php echo site_url('hutang/do_update/'.$data->id_hutang); ?>">
                                                     <input type="hidden" name="id_pemilik" value="<?php echo $data->id_pemilik; ?>">
                                                     <input type="hidden" name="id_hutang" value="<?php echo $data->id_hutang; ?>">
+                                                    <input type="hidden" name="tanggal" value="<?php echo $data->tanggal; ?>">
                                                     <div class="form-group">
                                                         <label for="nama_pelanggan">Nama Pelanggan</label>
                                                         <select class="form-control" id="nama_pelanggan" name="nama_pelanggan">
@@ -213,6 +218,9 @@
                     <div class="form-group">
                         <label for="jumlah_hutang">Jumlah Hutang</label>
                         <input type="text" class="form-control" id="jumlah_hutang" name="jumlah_hutang" placeholder="Masukkan Jumlah Hutang">
+                    </div><div class="form-group">
+                        <label for="tanggal">Tanggal</label>
+                        <input type="date" class="form-control" id="tanggal" name="tanggal" placeholder="Masukkan Tanggal">
                     </div>
                     <!-- Add more fields as needed -->
                 

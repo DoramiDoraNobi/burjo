@@ -62,6 +62,22 @@ class Hutang_model extends CI_Model
         return ($result) ? $result->nama_pelanggan : '';
         
     }
+    #menampilkan history hutang bedasarkan id_pemilik dengan order bedasarkan tanggal
+    public function GetHistoryHutang($id_pemilik)
+    {
+        $this->db->where('id_pemilik', $id_pemilik);
+        $this->db->order_by('tanggal', 'DESC');
+        $query = $this->db->get('hutang');
+        return $query->result();
+    }
+
+    public function GetHutangbyPelangganID($id_pelanggan)
+    {
+        $this->db->where('id_pelanggan', $id_pelanggan);
+        $query = $this->db->get('hutang');
+        return $query->result();
+    }
+    
 }
 
 ?>

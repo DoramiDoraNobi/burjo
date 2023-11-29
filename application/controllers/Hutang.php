@@ -36,6 +36,7 @@ class Hutang extends CI_Controller
             $data = array(
                 'id_pelanggan' => $this->input->post('nama_pelanggan'),
                 'jumlah_hutang' => $this->input->post('jumlah_hutang'),
+                'tanggal' => $this->input->post('tanggal'),
                 'id_pemilik' => $id_pemilik
 
             );
@@ -52,7 +53,8 @@ class Hutang extends CI_Controller
             'id_pelanggan' => $this->input->post('nama_pelanggan'),
             'jumlah_hutang' => $this->input->post('jumlah_hutang'),
             'status_pembayaran' => $this->input->post('status_pembayaran'), // 'lunas' atau 'belum lunas
-            'id_pemilik' => $id_pemilik
+            'id_pemilik' => $id_pemilik,
+            'tanggal' => $this->input->post('tanggal')
 
         );
         $this->Hutang_model->UpdateHutang($data);
@@ -65,7 +67,17 @@ class Hutang extends CI_Controller
         $this->Hutang_model->DeleteHutang($id_hutang);
         redirect('hutang');
     }
+
+    public function history_hutang(){
+        $id_pemilik = $this->session->userdata('ses_id');
+        $data['daftar_hutang'] = $this->Hutang_model->GetHistoryHutang($id_pemilik);
+        $this->load->view('hutang/history_hutang', $data);
+    }
+
+    public function getpelangganhutang($id_pelanggan){
+        $data['daftar_hutang'] = $this->Hutang_model->GetHutangbyPelangganID($id_pelanggan);
+        $this->load->view('hutang/hutang_pelanggan', $data);
+    
 }
-
-
+}
 ?>
