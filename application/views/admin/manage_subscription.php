@@ -84,25 +84,40 @@
             <div class="col-md-10">
                 <!-- Dashboard content here -->
                 <div class="mt-3 mr-3">
-
+                    <h2>Kelola Subscription Payments</h2>
                     <!-- Table for displaying data -->
                     <div class="mt-4">
-                        <table class="table table-green">
+                        <table class="table table-bordered table-green">
                             <thead>
                                 <tr>
-                                    <th scope="col">Nama Pelanggan</th>
-                                    <th scope="col">Jumlah Hutang</th>
-                                    <th scope="col">Tanggal</th>
+                                    <th>ID</th>
+                                    <th>User_ID</th>
+                                    <th>Amount</th>
+                                    <th>Payment_Date</th>
+                                    <th>Payment_Method</th>
+                                    <th>Payment_Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($daftar_hutang as $index => $data) { ?>
-                                    <tr>
-                                        <td><?php echo $this->Hutang_model->GetPelanngganbyID($data->id_pelanggan); ?></td>
-                                        <td><?php echo $data->jumlah_hutang; ?></td>
-                                        <td><?php echo $data->tanggal; ?></td>
-                                    </tr>
-                                <?php } ?>
+                                <?php foreach ($payments as $payment): ?>
+                                <tr>
+                                    <td><?= $payment->ID ?></td>
+                                    <td><?= $payment->User_ID ?></td>
+                                    <td><?= $payment->Amount ?></td>
+                                    <td><?= $payment->Payment_Date ?></td>
+                                    <td><?= $payment->Payment_Method ?></td>
+                                    <td><?= $payment->Payment_Status ?></td>
+                                    <td>
+                                        <?php if ($payment->Payment_Status !== 'Accepted'): ?>
+                                            <form action="<?= site_url('payment/change_status') ?>" method="post">
+                                                <input type="hidden" name="payment_id" value="<?= $payment->ID ?>">
+                                                <button type="submit" class="btn btn-success">Accept Payment</button>
+                                            </form>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

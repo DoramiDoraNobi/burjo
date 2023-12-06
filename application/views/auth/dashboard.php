@@ -63,6 +63,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo site_url('payment') ?>">Beli Berlangganan</a>
+                        </li>
+                        <?php if ($this->session->userdata('ses_level') == 'Admin') { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo site_url('payment/manage_subscription') ?>">Kelola Berlangganan</a>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>

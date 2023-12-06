@@ -78,7 +78,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
                         </li>
-                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo site_url('payment') ?>">Beli Berlangganan</a>
+                        </li>
                     </ul>
                 </div>
             </div>

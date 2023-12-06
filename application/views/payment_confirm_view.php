@@ -64,13 +64,13 @@
                     <h5>Menu</h5>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('pelanggan') ?>">Data Pengutang</a>
+                            <a class="nav-link active" href="<?php echo site_url('pelanggan') ?>">Data Pengutang</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="<?php echo site_url('hutang') ?>">Catatan Hutang</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="<?php echo site_url('hutang/history_hutang') ?>">History Hutang</a>
+                            <a class="nav-link " href="<?php echo site_url('hutang/history_hutang') ?>">History Hutang</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
@@ -84,28 +84,30 @@
             <div class="col-md-10">
                 <!-- Dashboard content here -->
                 <div class="mt-3 mr-3">
+                    
+                <div class="mt-4">
+                    <h2>Konfirmasi Berlangganan</h2>
+                    <form action="<?php echo site_url('payment/process_payment_confirmation') ?>" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="amount">Amount:</label>
+                            <input type="number" class="form-control" id="amount" name="amount" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="payment_date">Payment Date:</label>
+                            <input type="datetime-local" class="form-control" id="payment_date" name="payment_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="payment_method">Payment Method:</label>
+                            <input type="text" class="form-control" id="payment_method" name="payment_method" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="payment_proof">Payment Proof (Screenshot/Foto):</label>
+                            <input type="file" class="form-control-file" id="payment_proof" name="payment_proof" accept="image/*" required>
+                        </div>
+                        <button type="submit" class="btn btn-green">Submit</button>
+                    </form>
+                </div>
 
-                    <!-- Table for displaying data -->
-                    <div class="mt-4">
-                        <table class="table table-green">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nama Pelanggan</th>
-                                    <th scope="col">Jumlah Hutang</th>
-                                    <th scope="col">Tanggal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($daftar_hutang as $index => $data) { ?>
-                                    <tr>
-                                        <td><?php echo $this->Hutang_model->GetPelanngganbyID($data->id_pelanggan); ?></td>
-                                        <td><?php echo $data->jumlah_hutang; ?></td>
-                                        <td><?php echo $data->tanggal; ?></td>
-                                    </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
         </div>

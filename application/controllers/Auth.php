@@ -30,6 +30,7 @@ class Auth extends CI_Controller
             $this->session->set_userdata('masuk', TRUE);
             $this->session->set_userdata('ses_id', $data['id_pemilik']);
             $this->session->set_userdata('ses_nama', $data['nama_warung']);
+            $this->session->set_userdata('ses_level', $data['level']);
             redirect('auth/dashboard');
         } else {
             $this->session->set_flashdata('error', 'Gagal login: Cek username, password!');
