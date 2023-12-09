@@ -14,6 +14,7 @@ class Auth_model extends CI_Model
         $this->db->insert('pemilikwarmindo',$data);
         return $this->db->affected_rows();
     }
+    
 }
 
 ?>

@@ -46,6 +46,21 @@ class Pelanggan_model extends CI_Model
         $this->db->where('id_pelanggan', $id_pelanggan);
         $this->db->delete('Pelanggan');
     }
+
+    public function hitung_jumlah_pelanggan_by_id_pemilik($id_pemilik) {
+        $this->db->where('id_pemilik', $id_pemilik);
+        $query = $this->db->get('pelanggan');
+        return $query->num_rows();
+    }
+
+    public function getNamaPelangganByID($id_pelanggan)
+{
+    $this->db->select('nama_pelanggan');
+    $this->db->where('id_pelanggan', $id_pelanggan);
+    $query = $this->db->get('pelanggan');
+    $result = $query->row_array();
+    return $result['nama_pelanggan'];
+}
     
 }
 

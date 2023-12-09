@@ -75,9 +75,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
                         </li>
+                        <?php if ($this->session->userdata('ses_level') == 'Admin') { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('payment') ?>">Beli Berlangganan</a>
+                            <a class="nav-link" href="<?php echo site_url('payment/manage_subscription') ?>">Kelola Berlangganan</a>
                         </li>
+                    <?php } else { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo site_url('payment') ?>">Beli Langganan</a>
+                        </li>
+                    <?php } ?>
                     </ul>
                 </div>
             </div>
@@ -86,12 +92,20 @@
                 <div class="mt-3 mr-3">
                     
                 <div class="mt-4">
+                <h2>Konfirmasi Berlangganan</h2>
+                        <p>Setelah berlangganan di Catet.in, Anda akan mendapatkan akses ke fitur-fitur premium seperti:</p>
+                        <ul>
+                            <li>Manajemen Pengutang yang Lebih Komprehensif</li>
+                            <li>Analisis Hutang yang Lebih Mendalam</li>
+                            <li>Fitur Notifikasi yang Lebih Lanjut</li>
+                            <li>Dukungan Pelanggan Prioritas</li>
+                        </ul>
+                        <p>Untuk melakukan konfirmasi pembayaran, silakan mentransfer ke nomor bank berikut:</p>
+                        <p><strong>Bank: Contoh Bank</strong></p>
+                        <p><strong>Nomor Rekening: 1234567890</strong></p>
+                        <p><strong>Atas Nama: Catet.in</strong></p>
                     <h2>Konfirmasi Berlangganan</h2>
                     <form action="<?php echo site_url('payment/process_payment_confirmation') ?>" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="amount">Amount:</label>
-                            <input type="number" class="form-control" id="amount" name="amount" required>
-                        </div>
                         <div class="form-group">
                             <label for="payment_date">Payment Date:</label>
                             <input type="datetime-local" class="form-control" id="payment_date" name="payment_date" required>

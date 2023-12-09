@@ -17,7 +17,6 @@ class Payment extends CI_Controller {
     public function process_payment_confirmation() {
         // Tangkap data dari formulir
         $user_id = $this->session->userdata('ses_id');
-        $amount = $this->input->post('amount');
         $payment_date = $this->input->post('payment_date');
         $payment_method = $this->input->post('payment_method');
 
@@ -37,7 +36,7 @@ class Payment extends CI_Controller {
             $payment_proof = 'assets/payment_confirm/' . $upload_data['file_name'];
 
             // Simpan data konfirmasi pembayaran ke database
-            $this->Payment_model->save_payment_confirmation($user_id, $amount, $payment_date, $payment_method, $payment_proof);
+            $this->Payment_model->save_payment_confirmation($user_id, $payment_date, $payment_method, $payment_proof);
 
             // Redirect ke halaman sukses atau lainnya
             redirect('auth/dashboard');
@@ -65,5 +64,7 @@ class Payment extends CI_Controller {
         // Redirect kembali ke halaman admin subscription payments setelah mengubah status
         redirect('payment/manage_subscription');
     }
+
+    
 }
 ?>

@@ -92,9 +92,9 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>User_ID</th>
-                                    <th>Amount</th>
                                     <th>Payment_Date</th>
                                     <th>Payment_Method</th>
+                                    <th>Payment Proof</th>
                                     <th>Payment_Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -104,9 +104,11 @@
                                 <tr>
                                     <td><?= $payment->ID ?></td>
                                     <td><?= $payment->User_ID ?></td>
-                                    <td><?= $payment->Amount ?></td>
                                     <td><?= $payment->Payment_Date ?></td>
                                     <td><?= $payment->Payment_Method ?></td>
+                                    <td>
+                                    <img src="<?php echo base_url($payment->Payment_Proof); ?>" alt="Payment_Proof Image" width="100" height="100">
+                                    </td>
                                     <td><?= $payment->Payment_Status ?></td>
                                     <td>
                                         <?php if ($payment->Payment_Status !== 'Accepted'): ?>

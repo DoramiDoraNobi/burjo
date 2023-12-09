@@ -6,6 +6,8 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Auth_model');
+        $this->load->model('Pelanggan_model');
+        $this->load->model('Hutang_model');
     }
     public function index()
     {
@@ -16,7 +18,12 @@ class Auth extends CI_Controller
     }
     public function dashboard()
     {
-        $this->load->view('auth/dashboard');
+        $pemilik_id = $this->session->userdata('ses_id');
+        $data['jumlah_pelanggan'] = $this->Pelanggan_model->hitung_jumlah_pelanggan_by_id_pemilik($pemilik_id);
+        $data['jumlah_hutang'] = $this->Hutang_model->hitung_jumlah_hutang($pemilik_id);
+        $data['total_hutang'] = $this->Hutang_model->hitung_total_hutang($pemilik_id);
+        $data['hutang_terkini'] = $this->Hutang_model->GetHutangOrderByTanggal($pemilik_id);
+        $this->load->view('auth/dashboard', $data);
     }
 
     public function login()

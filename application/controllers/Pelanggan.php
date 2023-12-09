@@ -65,6 +65,7 @@ class Pelanggan extends CI_Controller
         $this->Pelanggan_model->DeletePelanggan($id_pelanggan);
         redirect('pelanggan');
     }
+    
 }
 
 

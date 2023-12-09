@@ -7,8 +7,8 @@
     <title>Dashboard - Pencatatan Hutang</title>
     <!-- Load Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-     <!-- Load Bootstrap JS -->
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Load Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
@@ -40,17 +40,6 @@
 
         .btn-green:focus {
             box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
-        }
-
-        /* Added styles for the table */
-        .table-green {
-            background-color: #28a745;
-            color: #fff;
-        }
-
-        .table-green th,
-        .table-green td {
-            border-color: #fff;
         }
     </style>
 </head>
@@ -90,27 +79,10 @@
             <div class="col-md-10">
                 <!-- Dashboard content here -->
                 <div class="mt-3 mr-3">
-                    
-                    <!-- Table for displaying data -->
                     <div class="mt-4">
-                        <table class="table table-green">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nama Pelanggan</th>
-                                    <th scope="col">Jumlah Hutang</th>
-                                    <th scope="col">Tanggal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($daftar_hutang as $index => $data) { ?>
-                                    <tr>
-                                        <td><?php echo $this->Hutang_model->GetPelanngganbyID($data->id_pelanggan); ?></td>
-                                        <td><?php echo $data->jumlah_hutang; ?></td>
-                                        <td><?php echo $data->tanggal; ?></td>
-                                    </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                        <h2>Notifikasi</h2>
+                        <p>Terima kasih atas konfirmasi pembayaran Anda.</p>
+                        <p>Langganan Anda sedang dalam proses verifikasi oleh admin. Harap tunggu konfirmasi lebih lanjut.</p>
                     </div>
                 </div>
             </div>

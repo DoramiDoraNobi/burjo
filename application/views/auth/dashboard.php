@@ -48,40 +48,94 @@
                 <div class="mt-3 ml-3">
                     <h5>Menu</h5>
                     <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="<?php echo site_url('auth/dashboard') ?>">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo site_url('pelanggan') ?>">Data Pengutang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo site_url('hutang') ?>">Catatan Hutang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo site_url('hutang/history_hutang') ?>">History Hutang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
+                    </li>
+                    <?php if ($this->session->userdata('ses_level') == 'Admin') { ?>
                         <li class="nav-item">
-                            <a class="nav-link active" href="<?php echo site_url('auth/dashboard') ?>">Dashboard</a>
+                            <a class="nav-link" href="<?php echo site_url('payment/manage_subscription') ?>">Kelola Berlangganan</a>
                         </li>
+                    <?php } else { ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('pelanggan') ?>">Data Pengutang</a>
+                            <a class="nav-link" href="<?php echo site_url('payment') ?>">Beli Langganan</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('hutang') ?>">Catatan Hutang</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('hutang/history_hutang') ?>">History Hutang</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('auth/do_logout') ?>">Logout</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo site_url('payment') ?>">Beli Berlangganan</a>
-                        </li>
-                        <?php if ($this->session->userdata('ses_level') == 'Admin') { ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo site_url('payment/manage_subscription') ?>">Kelola Berlangganan</a>
-                            </li>
-                        <?php } ?>
-                    </ul>
+                    <?php } ?>
+                </ul>
+
                 </div>
             </div>
             <div class="col-md-10">
-                <!-- Dashboard content here -->
-                <div class="mt-3 mr-3">
-                    <h2>Catatan Hutang</h2>
-                    <p>Selamat datang di aplikasi pencatatan hutang.</p>
-                    <button class="btn btn-green">Tambah Catatan Hutang</button>
+    <!-- Dashboard content here -->
+    <div class="mt-3 mr-3">
+        <h2>Catatan Hutang</h2>
+        <p>Selamat datang di aplikasi pencatatan hutang.</p>
+
+        <div class="row mt-4">
+            <!-- Card for Jumlah Pelanggan -->
+            <div class="col-md-4 mb-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Jumlah Pelanggan</h5>
+                        <p class="card-text"><?php echo $jumlah_pelanggan ?></p>
+                    </div>
                 </div>
             </div>
+
+            <!-- Card for Jumlah Hutang -->
+            <div class="col-md-4 mb-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Jumlah Hutang</h5>
+                        <p class="card-text"><?php echo $jumlah_hutang ?></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card for Total Hutang -->
+            <div class="col-md-4 mb-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Hutang</h5>
+                        <p class="card-text">Rp.<?php echo $total_hutang ?></p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Hutang Terkini</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nama Pengutang</th>
+                        <th>Jumlah Hutang</th>
+                        <td>Tanggal</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($hutang_terkini as $hutang): ?>
+                        <tr>
+                            <td><?= $this->Pelanggan_model->getNamaPelangganByID($hutang->id_pelanggan); ?></td>
+                            <td><?= $hutang->jumlah_hutang ?></td>
+                            <td><?= $hutang->tanggal ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
         </div>
     </div>
 

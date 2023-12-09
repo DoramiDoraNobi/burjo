@@ -77,7 +77,25 @@ class Hutang_model extends CI_Model
         $query = $this->db->get('hutang');
         return $query->result();
     }
+
     
+
+public function hitung_total_hutang($id_pemilik) {
+    $this->db->select_sum('jumlah_hutang');
+    $this->db->where('id_pemilik', $id_pemilik);
+    $query = $this->db->get('hutang');
+    $result = $query->row();
+    return $result->jumlah_hutang;
 }
 
-?>
+
+
+public function GetHutangOrderByTanggal($id_pemilik)
+{
+    $this->db->where('id_pemilik', $id_pemilik);
+    $this->db->order_by('tanggal', 'DESC');
+    $query = $this->db->get('hutang');
+    return $query->result();
+}
+
+}
